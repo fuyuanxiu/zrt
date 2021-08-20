@@ -1,0 +1,177 @@
+/* body{padding: 10px; background:#000d4a;} */
+body{padding: 10px; background:#000033;}
+ul{margin: 0; padding: 0;}
+header1{width:1900px; height: 83px; line-height: 83px; color: #FFFFFF; font-size: 30px; letter-spacing: 10px; background: url(../images/bg_title.png) no-repeat; margin: 0 auto;background-size: 100% 100%;  text-align: center;}
+
+header{width:1900px; height: 83px; line-height: 83px; color: #FFFFFF; font-size: 30px; letter-spacing: 10px; background: url(../images/header_bg.png) no-repeat; margin: 0 auto;background-size: 100% 100%;  text-align: center;}
+
+.top{width:1900px; height: 83px;color: #FFFFFF;font-size: 30px;}
+.top-left{height:100%;height: 83px;line-height: 83px;position:relative;float:left;width:20%;font-size: 20px;}
+.top-mid{height:100%;height: 83px;line-height: 83px;text-align:center;float:left;width:56%;background: url(../images/bg_title.png) no-repeat; margin: 0 auto; background-size: 100% 100%;text-align: center;}
+.top-right{height:100%;height: 83px;line-height: 83px;float:right;width:24%;font-size: 20px;}
+
+/*2020-12-23新增 时间字段显示样式-start*/
+.head{ height:1.05rem;background-size: 100% 100%; position: relative; z-index: 100;width: 1880px;}
+.logo{ position:absolute; left:.9rem; top:-6rem;height:12rem; width:12rem; line-height: .75rem;background: url(../images/rk_logo.png) no-repeat;background-size: 12rem 12rem;}
+.logo_w{ position:absolute; left:13.8rem; top:0; line-height: .75rem;}
+.logo_word{color:#00CCFF;font-size:3.2rem;}
+.weather{ position:absolute; right:.9rem; top:0; line-height: .75rem;}
+.time{color:#999999;font-size:2rem;}
+/*2020-12-23新增-end*/
+
+.container{width: 1900px;}
+.col-lg-3,.col-lg-6{padding: 0; margin: 0;}
+.m-20{margin-top: 20px;}
+.title{width: 100%;  font-size: 2.4rem; color: #ff9000; line-height: 40px; padding-left: 30px; background: url(../images/title_icon.png) left center no-repeat; float: left;}
+.title_box{width: 940px; height: 160px;margin-right:10px; padding: 0 0 25px 25px; background: url(../images/bg_box2.png) no-repeat; background-size: 100% 100%;float: left;}
+.box1{width: 1905px; height: 745px;}
+.box1_con{width: 1900px; height: 745px; float: left;}
+.box2{width: 940px; height: 360px;margin-right:10px;  background: url(../images/bg_box2.png) no-repeat; background-size: 100% 100%;float: left;}
+.box2_con{width:930px; height: 320px; float: left; text-align: center;}
+.box2_word{color: #FFFFFF; font-size: 3.5rem;}
+
+.logo_bottom{float:left;height:5rem; width:5rem; line-height: .75rem;
+background: url(../images/gs_logo.png) no-repeat;background-size: 4rem 4rem;margin-right:15px;}
+small{font-size: 18px; color: #FF9000;}
+footer{width:1900px; height: 40px; line-height: 40px; color: #FFFFFF; font-size: 24px; letter-spacing: 10px;  text-align: center;display:flex;justify-content:center ;}
+
+/****表格样式 ****/
+.tablebox{
+	width: 935px;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+    /* background-color: rgba(6,26,103,1); */
+   /* border: 2px solid #333399;*/
+	border-collapse: collapse;
+    
+}
+
+
+.title1{width: 100%; height: 60px; font-size: 16px; color: #ff9000; line-height: 60px; padding-left: 20px; background: url(../images/title_icon.png) left center no-repeat; float: left;}
+
+.tbl-header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.tbl-body {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.tablebox table {
+    width: 935px;
+}
+
+.tablebox table td {
+    font-size: 2rem;
+    /* color: #7ca6f4; */
+    color: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+}
+
+.tablebox table th{
+    font-size: 2rem;
+    /* color: #7ca6f4; */
+    color: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+}
+
+.tablebox table tr th {
+    background-color: #1f1f9c;
+    cursor: pointer;
+}
+
+.tablebox table tr td {
+	border-right: 2px solid #333399;
+	/* border: 2px solid #333399; */
+	border-collapse: collapse;
+    background-color: transparent;
+}
+
+/* .tbl-body tr:nth-child(even) td,.tbl-body1 tr:nth-child(even) td {
+    background-color: rgba(31, 31, 156, .5);
+} */
+
+.tablebox table tr td span,
+.tablebox table tr td span {
+    font-size: 2rem;
+}
+
+
+
+.tablebox_tip{
+	width: 935px;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+    /* background-color: rgba(6,26,103,1); */
+   /* border: 2px solid #333399;*/
+	border-collapse: collapse;
+    
+}
+
+
+.title1_tip{width: 100%; height: 60px; font-size: 16px; color: #ff9000; line-height: 60px; padding-left: 20px; background: url(../images/title_icon.png) left center no-repeat; float: left;}
+
+.tbl-header_tip {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.tbl-body_tip {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.tablebox_tip table {
+    width: 935px;
+}
+
+.tablebox_tip table td {
+    font-size: 2rem;
+    /* color: #7ca6f4; */
+    color: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+}
+
+.tablebox_tip table th{
+    font-size: 2rem;
+    /* color: #7ca6f4; */
+    color: #FFFFFF;
+    line-height: 35px;
+    text-align: center;
+}
+
+.tablebox_tip table tr th {
+    background-color: #1f1f9c;
+    cursor: pointer;
+}
+
+.tablebox_tip table tr td {
+	border-right: 2px solid #333399;
+	/* border: 2px solid #333399; */
+	border-collapse: collapse;
+    background-color: transparent;
+}
+
+/* .tbl-body_tip tr:nth-child(even) td,.tbl-body1 tr:nth-child(even) td {
+    background-color: rgba(31, 31, 156, .5);
+} */
+
+.tablebox_tip table tr td span,
+.tablebox_tip table tr td span {
+    font-size: 2rem;
+}

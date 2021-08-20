@@ -104,6 +104,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/layout", "anon");
 		
 		filterChainDefinitionMap.put("/kanban/toDemo", "anon");//看板demo
+		filterChainDefinitionMap.put("/kanban/*", "anon");//看板
+		filterChainDefinitionMap.put("/kanban/*/*", "anon");//看板
+		filterChainDefinitionMap.put("/kanban/*/*/*", "anon");//看板
 
 		filterChainDefinitionMap.put("/user/sendMsg", "anon");
 		filterChainDefinitionMap.put("/user/login", "anon");
@@ -120,6 +123,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/glueinput/*", "anon");
         filterChainDefinitionMap.put("/queryAppVersion", "anon");
 
+        filterChainDefinitionMap.put("/zrt/*", "anon");
 
         filterChainDefinitionMap.put("/wd_rf/login1", "anon");
         filterChainDefinitionMap.put("/wd_rf/queryPurview", "anon");

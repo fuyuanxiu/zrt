@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SMT生产看板</title>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="../kanban/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../kanban/js/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../kanban/js/bootstrap.min.js"></script>
+<link href="../kanban/css/hh_div.css" rel="stylesheet" />
+
+<link href="../kanban/css/hh_table.css" rel="stylesheet" />
+<style>
+ul {
+	list-style: none;
+	padding: 2rem 0;
+}
+
+li {
+	line-height: 24px;
+	color: #ffffff;
+	font-size: 2.4rem;
+	margin-left: 1rem;
+	display: inline;
+	white-space: normal;
+	word-break: break-all;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+progress {
+	width: 50rem;
+	height: 2.5rem;
+	margin-top: 1rem;
+}
+</style>
+</head>
+<body>
+	<header>SMT生产看板</header>
+	<div class="head">
+		<div class="weather">
+			<span class="time" id="showTime"></span>
+		</div>
+
+		<script>
+    var t = null;
+    t = setTimeout(time,1000);//開始运行
+    function time()
+    {
+       clearTimeout(t);//清除定时器
+       dt = new Date();
+		var y=dt.getFullYear();
+		var mt=dt.getMonth()+1;
+		var day=dt.getDate();
+       var h=dt.getHours();//获取时
+       var m=dt.getMinutes();//获取分
+       var s=dt.getSeconds();//获取秒
+       document.getElementById("showTime").innerHTML = y+"年"+mt+"月"+day+"日  "+h+"时"+m+"分"+s+"秒";
+       t = setTimeout(time,1000); //设定定时器，循环运行     
+    } 
+
+</script>
+	</div>
+
+	<div class="container m-20">
+		<div class="row">
+			<div class="title_box">
+				<div style="height: 99%; margin-top: 10px;">
+					<ul>
+						<li style="width: 33%;"><span id='prodLine'>生产线体：</span></li>
+						<li style="width: 33%;"><span id='taskNo'>工单号：</span></li>
+						<li style="width: 33%;"><span id='prodNo'>产品编码：</span></li>
+					</ul>
+					<ul>
+						<li><span id='prodName'>产品名称：</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="title_box">
+				<div style="height: 99%; margin-top: 10px;">
+					<ul>
+						<li><span id='zhitong'>直通率：</span></li>
+						<li><span id='stProd'>标准产能：</span></li>
+						<li><span id='fone'>一轨：</span></li>
+						<li><span id='ftwo'>二轨：</span></li>
+					</ul>
+					<ul>
+						<li><span id='progress'>生产进度：/</span></li>
+						<li style="margin-left: 3rem;"><progress id="prog"
+								value="0" max="100"></progress></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div style="margin-top: 0px; height: 390px;">
+				<div style="float: left;" class="m-20">
+					<div class="box2">
+						<div class="title">每小时产能示图</div>
+						<div class="box2_con" id="prodHour"></div>
+					</div>
+					<div class="box2">
+						<div class="title">站位余数预警</div>
+						<div class="box2_con">
+							<div class="boxall boxall_table">
+								<div class="tablebox">
+									<div class="tbl-header">
+										<table>
+											<thead>
+												<tr>
+													<th>站位</th>
+													<th>物料编码</th>
+													<th>接料总数</th>
+													<th>吸取数</th>
+													<th>剩余数</th>
+													<th>剩余可生产数</th>
+													<th>已发未接料数</th>
+												</tr>
+											</thead>
+											<tbody style="opacity: 0;" id="tableList1_1">
+											</tbody>
+										</table>
+									</div>
+
+									<div class="tbl-body">
+										<table>
+											<thead>
+												<tr>
+													<th>站位</th>
+													<th>物料编码</th>
+													<th>接料总数</th>
+													<th>吸取数</th>
+													<th>剩余数</th>
+													<th>剩余可生产数</th>
+													<th>已发未接料数</th>
+												</tr>
+											</thead>
+											<tbody id="tableList1_2">
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="margin-top: 0px; height: 390px;">
+				<div style="float: left;" class="m-20">
+					<div class="box2">
+						<div class="title">抛料示图</div>
+						<div class="box2_con" id="paoLiao"></div>
+					</div>
+					<div class="box2">
+						<div class="title">换料核对提示</div>
+						<div class="box2_con" id="switchTips">
+							<div class="boxall boxall_table">
+								<div class="tablebox_tip">
+									<div class="tbl-header_tip">
+										<table>
+											<thead>
+												<tr>
+													<th>换料时间</th>
+													<th>物料编码</th>
+													<th>位置</th>
+													<th>已过时间</th>
+												</tr>
+											</thead>
+											<tbody style="opacity: 0;" id="tableList2_1">
+												
+											</tbody>
+										</table>
+									</div>
+
+									<div class="tbl-body_tip">
+										<table>
+											<thead>
+												<tr>
+													<th>换料时间</th>
+													<th>物料编码</th>
+													<th>位置</th>
+													<th>已过时间</th>
+												</tr>
+											</thead>
+											<tbody id="tableList2_2">
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- <footer>
+		<div class="logo_bottom"></div>
+		宁波广深科技有限公司(技术支持)
+	</footer> -->
+	<script th:inline="javascript">
+	var context = [[@{/}]];
+	var KANBAN_DATA=[[${KANBAN_DATA}]];
+	var LINE_NO=[[${LINE_NO}]];
+	console.log(KANBAN_DATA)
+	//var FLOOR=[[${FLOOR}]];
+    document.title = 'SMT生产看板'
+     </script>
+	<!-- <script type="text/javascript" src="../kanban/scripts/tablebox.js"></script> -->
+	<script type="text/javascript" src="../kanban/js/echarts.min.js"></script>
+	<script type="text/javascript" src="../kanban/scripts/smt.js"></script>
+</body>
+</html>

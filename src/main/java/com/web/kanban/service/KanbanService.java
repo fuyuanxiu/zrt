@@ -8,5 +8,7 @@ import org.springframework.data.domain.PageRequest;
 
 public interface KanbanService {
 
-    
+	ApiResponseResult getLineList() throws Exception;
+
+	ApiResponseResult getSmtKanbanData(String lineNo) throws Exception;
 }
