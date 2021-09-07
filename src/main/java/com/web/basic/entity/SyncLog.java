@@ -21,7 +21,7 @@ import java.util.Date;
 @ApiModel
 public class SyncLog extends BaseEntity {
     private static final long serialVersionUID = 6944849575214769761L;
-    public static final String TABLE_NAME = "t_sync_log";
+    public static final String TABLE_NAME = "app_t_sync_log";
 
     /**
      * 编码

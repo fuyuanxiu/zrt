@@ -43,8 +43,8 @@
 
         <button class="layui-btn layui-btn-normal" onclick="addRole()">添加角色</button>
 
-        <!--<div style="display:none;" id="currentUser"><shiro:principal property="id"></shiro:principal></div>-->
-        <div style="display:none;" id="currentUser"><shiro:principal property="fid"></shiro:principal></div>
+        <div style="display:none;" id="currentUser"><shiro:principal property="id"></shiro:principal></div>
+       <!--  <div style="display:none;" id="currentUser"><shiro:principal property="fid"></shiro:principal></div> -->
 
         <table id="roleList" lay-filter="roleTable"></table>
 
@@ -109,7 +109,7 @@
         </form>
     </div>
 
-    <!--底部-->
+    <!--搴曢儴-->
     <!--<div th:replace="fragments/footer :: footer"></div>-->
 
     <link  th:href="@{/ztree/css/zTreeStyle/zTreeStyle.css}" href="/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />

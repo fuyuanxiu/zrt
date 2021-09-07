@@ -54,7 +54,7 @@ public class ReportController extends WebController {
 			//List<Object> permList = reportService.getTreeList("10000","1000",barcode,UserUtil.getSessionUser().getFcode(),"123",5,1);
 			//logger.debug("批次追溯列表查询=permList:" + permList);
 			//getSysLogService().success(method,methodName,permList);
-			mav.addObject("permList", reportService.getTreeList("10000","1000",barcode,UserUtil.getSessionUser().getFcode(),"123",5,1));
+			mav.addObject("permList", reportService.getTreeList("10000","1000",barcode,UserUtil.getSessionUser().getBsCode(),"123",5,1));
 			mav.addObject("msg", "ok");
 		} catch (Exception e) {
 			e.printStackTrace();

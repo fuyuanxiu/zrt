@@ -35,7 +35,7 @@ public interface SysPermissionDao extends CrudRepository<SysPermission, Long>, J
             " from app_permission p "+
            " LEFT JOIN app_role_permission rp ON rp.permit_id=p.id "+
             " LEFT JOIN app_role r ON r.id=rp.role_id "+
-           " LEFT JOIN app_user_role ur ON ur.role_id=r.id "+
+           " LEFT JOIN app_user_role ur ON ur.role_id=r.id and ur.is_del=0"+
            " WHERE ur.user_id=?1 and p.is_del=0 and rp.is_del=0 "+
            " order by p.zindex ", nativeQuery = true)
     public List<Map<String, Object>> getUserPerms(long id);

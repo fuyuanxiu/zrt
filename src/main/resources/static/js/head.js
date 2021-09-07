@@ -16,9 +16,9 @@ $(function(){
     layui.use('element', function(){
         var element = layui.element;
         // 左侧导航区域（可配合layui已有的垂直导航）
-        $.get(context+"/sysPermission/getUserPermsByPrc",function(data){
+        $.get(context+"/sysPermission/getUserPerms",function(data){
             if(data.result){
-            	console.log(data.data)
+            	//console.log(data.data)
                 getMenus(data.data);
                 element.render('nav');
             }else{

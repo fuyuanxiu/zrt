@@ -37,11 +37,11 @@ $(function() {
                 ,{field:'id', title:'ID', width:80, unresize: true, sort: true}
                 ,{field:'bsCode', title:'账号', width:120}
                 ,{field:'bsName', title:'用户名称', width:120}
-                ,{field:'mobile', title:'手机号', width:120}
-                ,{field:'email', title: '邮箱', width:180}
-                ,{field:'isJob', title:'是否在职',width:95,align:'center',templet:'#jobTpl'}
+                ,{field:'bsMobile', title:'手机号', width:120}
+                ,{field:'bsEmail', title: '邮箱', width:180}
+                ,{field:'bsStatus', title:'使用状态',width:95,align:'center',templet:'#statusTpl'}
                 ,{field:'createdTime', title: '添加时间', width:150}
-                ,{field:'roleNames', title: '角色名称', minWidth:80}
+                //,{field:'roleNames', title: '角色名称', minWidth:80}
                 ,{fixed:'right', title:'操作',width:200,align:'center', toolbar:'#optBar'}
             ]]
             ,  done: function(res, curr, count){
@@ -56,8 +56,8 @@ $(function() {
             }
         });
 
-        //监听在职操作
-        form.on('switch(isJobTpl)', function(obj){
+        //监听账号状态操作
+        form.on('switch(isStatusTpl)', function(obj){
             //console.log(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
             setJobUser(obj,this.value,this.name,obj.elem.checked);
         });
@@ -113,7 +113,7 @@ $(function() {
 //设置用户是否离职
 function setJobUser(obj,id,name,checked){
     var isJob=checked ? 0 : 1;
-    var userIsJob=checked ? "在职":"离职";
+    var userIsJob=checked ? "正常":"停用";
     //是否离职
     layer.confirm('您确定要把用户：'+name+'设置为'+userIsJob+'状态吗？', {
         btn: ['确认','返回'] //按钮
@@ -318,8 +318,8 @@ function addUser(){
                 $("#version").val("");
                 $("#bsCode").val("");
                 $("#bsName").val("");
-                $("#mobile").val("");
-                $("#email").val("");
+                $("#bsMobile").val("");
+                $("#bsEmail").val("");
                 //显示角色数据
                 $("#roleDiv").empty();
                 $.each(data.data, function (index, item) {
@@ -361,6 +361,7 @@ function getUserAndRoles(obj,id) {
         //回显数据
         $.get(context+"/sysUser/getUserAndRoles",{"id":id},function(data){
             if(isLogin(data)){
+            	console.log(data)
                 if(data.result==true && data.data.user!=null){
                     var existRole = new Array();
                     // var existRole='';
@@ -375,8 +376,8 @@ function getUserAndRoles(obj,id) {
                     $("#version").val(data.data.user.version==null?'':data.data.user.version);
                     $("#bsCode").val(data.data.user.bsCode==null?'':data.data.user.bsCode);
                     $("#bsName").val(data.data.user.bsName==null?'':data.data.user.bsName);
-                    $("#mobile").val(data.data.user.mobile==null?'':data.data.user.mobile);
-                    $("#email").val(data.data.user.email==null?'':data.data.user.email);
+                    $("#bsMobile").val(data.data.user.mobile==null?'':data.data.user.mobile);
+                    $("#bsEmail").val(data.data.user.email==null?'':data.data.user.email);
                     //显示角色数据
                     $("#roleDiv").empty();
                     $.each(data.data.roles, function (index, item) {
@@ -509,7 +510,7 @@ function cleanUser(){
     $("#id").val("");
     $("#bsName").val("");
     $("#mobile").val("");
-    $("#email").val("");
+    $("#bsEmail").val("");
     $("#bsPassword").val("");
 }
 

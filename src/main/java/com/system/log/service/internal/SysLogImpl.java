@@ -87,8 +87,8 @@ public class SysLogImpl implements SysLogService {
 			sysLog.setMethodName(methodName);
 			sysLog.setCreatedTime(new Date());
 			sysLogDao.save(sysLog);
-//			sysLog.setUsername(UserUtil.getSessionUser().getUserCode());
-            sysLog.setUsername(UserUtil.getSessionUser().getFcode());
+			sysLog.setUsername(UserUtil.getSessionUser().getBsCode());
+            //sysLog.setUsername(UserUtil.getSessionUser().getFcode());
 			return ApiResponseResult.success();
 		}catch(Exception e){
 			SysLog s = new SysLog();
@@ -119,8 +119,8 @@ public class SysLogImpl implements SysLogService {
 			sysLog.setMethodName(methodName);
 			sysLog.setCreatedTime(new Date());
 			sysLog.setOperation("操作成功");
-//			sysLog.setUsername(UserUtil.getSessionUser().getUserCode());
-            sysLog.setUsername(UserUtil.getSessionUser().getFcode());
+			sysLog.setUsername(UserUtil.getSessionUser().getBsCode());
+           // sysLog.setUsername(UserUtil.getSessionUser().getFcode());
 			sysLogDao.save(sysLog);
 			return ApiResponseResult.success();
 		}catch(Exception e){
@@ -145,8 +145,8 @@ public class SysLogImpl implements SysLogService {
 			sysLog.setCreatedTime(new Date());
 			sysLog.setOperation("操作失败");
 			sysLog.setParams(param.toString());
-//			sysLog.setUsername(UserUtil.getSessionUser().getUserCode());
-            sysLog.setUsername(UserUtil.getSessionUser().getFcode());
+			sysLog.setUsername(UserUtil.getSessionUser().getBsCode());
+            //sysLog.setUsername(UserUtil.getSessionUser().getFcode());
 			sysLogDao.save(sysLog);
 			return ApiResponseResult.success();
 		}catch(Exception e){

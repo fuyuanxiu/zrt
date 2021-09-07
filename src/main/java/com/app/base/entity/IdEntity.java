@@ -8,8 +8,8 @@ public abstract class IdEntity implements Serializable {
 	private static final long serialVersionUID = 5391836388143717010L;
 	@Id
 	// @GeneratedValue(strategy = GenerationType.AUTO)
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
-	@TableGenerator(name = "id_gen", table = "id_gen", initialValue = 5000, allocationSize=50)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "app_id_gen")
+	@TableGenerator(name = "app_id_gen", table = "app_id_gen", initialValue = 5000, allocationSize=50)
 	protected Long id;
 
 	// @Id

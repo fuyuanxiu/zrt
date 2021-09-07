@@ -67,10 +67,10 @@ public class OnlineImpl implements OnlineService {
         			  if(StringUtils.isBlank(keyword)){
         				  flag = true;
         			  }else{
-//        				  int result1 = user.getUserName().indexOf(keyword);
-//        				  int result2 = user.getUserMobile().indexOf(keyword);
-                          int result1 = user.getFcode().indexOf(keyword);
-                          int result2 = user.getFname().indexOf(keyword);
+        				  int result1 = user.getBsName().indexOf(keyword);
+        				  int result2 = user.getBsMobile().indexOf(keyword);
+//                          int result1 = user.getFcode().indexOf(keyword);
+//                          int result2 = user.getFname().indexOf(keyword);
         				  if((result1 == -1) &&(result2 == -1)){
         					  flag = false;
         				  }else{
@@ -78,14 +78,14 @@ public class OnlineImpl implements OnlineService {
         				  }
         			  }
         			  if(flag){
-//        				  o.setBsCode(user.getUserCode());
-//            			  o.setBsName(user.getUserName());
-//            			  o.setId(user.getId());
-//            			  o.setMobile(user.getUserMobile());
-                          o.setBsCode(user.getFcode());
-                          o.setBsName(user.getFname());
-                          o.setId(Long.parseLong(user.getFid()));
-                          o.setMobile(user.getFcode());
+        				  o.setBsCode(user.getBsCode());
+            			  o.setBsName(user.getBsName());
+            			  o.setId(user.getId());
+            			  o.setMobile(user.getBsMobile());
+//                          o.setBsCode(user.getFcode());
+//                          o.setBsName(user.getFname());
+//                          o.setId(Long.parseLong(user.getFid()));
+//                          o.setMobile(user.getFcode());
             			  
             			  o.setSessionId(session.getId().toString());
             			  o.setHost(session.getHost());
@@ -94,13 +94,11 @@ public class OnlineImpl implements OnlineService {
             			  list.add(o);
         			  }
         			  
-        		  }
-        		  
+        		  }	  
         		  
     		  }catch(Exception e){
     			  continue;
     		  }
-    		  
     	  }
     	  DataGrid s = DataGrid.create(list, (int)list.size(), pageRequest.getPageNumber() + 1, pageRequest.getPageSize());
           return ApiResponseResult.success().data(DataGrid.create(list, (int)list.size(), pageRequest.getPageNumber() + 1, pageRequest.getPageSize()));

@@ -204,11 +204,11 @@ public class SysUserController extends WebController{
         }
     }
 
-    @ApiOperation(value = "设置在职/离职", notes = "设置在职/离职")
+    @ApiOperation(value = "设置正常/禁用", notes = "设置正常/禁用")
     @RequestMapping(value = "/doJob", method = RequestMethod.POST)
     @ResponseBody
     public ApiResponseResult doJob(Long id, Integer isJob) throws Exception{
-        String method = "/sysUser/doJob";String methodName ="设置在职/离职";
+        String method = "/sysUser/doJob";String methodName ="设置正常/禁用";
         try{
             ApiResponseResult result = sysUserService.doJob(id, isJob);
             logger.debug("设置在职/离职=doJob:");

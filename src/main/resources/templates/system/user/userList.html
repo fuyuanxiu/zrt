@@ -11,7 +11,7 @@
 
         <form id="userSearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
             <div class="layui-form-item">
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">用户账号</label>
                 <div class="layui-input-inline">
                     <input id="nameSearch" name="nameSearch" autocomplete="off" class="layui-input" type="text"/>
                 </div>
@@ -44,16 +44,16 @@
         <button class="layui-btn layui-btn-normal" onclick="addUser()">开通用户</button>
         <!--<button class="layui-btn layui-btn-normal" onclick="nolockUser()">解锁</button>-->
 
-        <!--<div style="display:none;" id="currentUser"><shiro:principal property="id"></shiro:principal></div>-->
-        <div style="display:none;" id="currentUser"><shiro:principal property="fid"></shiro:principal></div>
+       <div style="display:none;" id="currentUser"><shiro:principal property="id"></shiro:principal></div>
+        <!-- <div style="display:none;" id="currentUser"><shiro:principal property="fid"></shiro:principal></div> -->
 
         <table id="uesrList" lay-filter="userTable"></table>
 
-        <script type="text/html" id="jobTpl">
-            {{#  if(!d.isJob){ }}
-            <input type="checkbox" name="{{d.bsCode}}" value="{{d.id}}" lay-skin="switch" lay-text="在职|离职" lay-filter="isJobTpl" checked="checked" />
+        <script type="text/html" id="statusTpl">
+            {{#  if(!d.bsStatus){ }}
+            <input type="checkbox" name="{{d.bsCode}}" value="{{d.id}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="isStatusTpl" checked="checked" />
             {{#  } else { }}
-            <input type="checkbox" name="{{d.bsCode}}" value="{{d.id}}" lay-skin="switch" lay-text="在职|离职" lay-filter="isJobTpl"/>
+            <input type="checkbox" name="{{d.bsCode}}" value="{{d.id}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="isStatusTpl"/>
             {{#  } }}
         </script>
 
@@ -93,14 +93,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">手机号</label>
                 <div class="layui-input-inline">
-                    <input id="mobile" name="mobile" lay-verify="required" autocomplete="off" class="layui-input" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                    <input id="bsMobile" name="bsMobile" lay-verify="required" autocomplete="off" class="layui-input" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
                            onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
-                    <input id="email" name="email" lay-verify="required | email" autocomplete="off" class="layui-input" type="text"/>
+                    <input id="bsEmail" name="bsEmail" lay-verify="required | email" autocomplete="off" class="layui-input" type="text"/>
                 </div>
             </div>
             <!--<div class="layui-form-item">-->

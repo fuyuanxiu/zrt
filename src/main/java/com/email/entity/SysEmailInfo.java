@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @ApiModel
 public class SysEmailInfo extends BaseEntity {
     private static final long serialVersionUID = 7151771262953316256L;
-    public static final String TABLE_NAME = "sys_email_info";
+    public static final String TABLE_NAME = "app_sys_email_info";
 
     /**
      * 发件人地址（多个用“，”隔开）

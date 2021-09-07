@@ -61,8 +61,7 @@ public class SysUserImpl implements SysUserService {
     @Override
     @Transactional
     public ApiResponseResult add(SysUser sysUser) throws Exception{
-    	return ApiResponseResult.success();
-/*        if(sysUser == null){
+        if(sysUser == null){
             return ApiResponseResult.failure("用户不能为空！");
         }
         if(StringUtils.isEmpty(sysUser.getBsCode())){
@@ -77,7 +76,7 @@ public class SysUserImpl implements SysUserService {
                 return ApiResponseResult.failure("该账号已存在！");
             }
             sysUser.setCreatedTime(new Date());
-            sysUser.setIsJob(0);
+            sysUser.setBsStatus(0);
             sysUser.setBsPassword(DigestUtils.md5Hex("654321"));//设置密码
             sysUserDao.save(sysUser);
 
@@ -99,9 +98,7 @@ public class SysUserImpl implements SysUserService {
             if(o == null){
                 return ApiResponseResult.failure("用户不存在！");
             }
-            String originalCode = o.getBsCode();
-            if(o.getBsCode().equals(sysUser.getBsCode())){
-            }else{
+            if(!o.getBsCode().equals(sysUser.getBsCode())){
                 int count = sysUserDao.countByIsDelAndBsCode(0, sysUser.getBsCode());
                 if(count > 0){
                     return ApiResponseResult.failure("用户编号已存在，请填写其他用户编号！");
@@ -110,8 +107,8 @@ public class SysUserImpl implements SysUserService {
             }
             o.setModifiedTime(new Date());
             o.setBsName(sysUser.getBsName());
-            o.setMobile(sysUser.getMobile());
-            o.setEmail(sysUser.getEmail());
+            o.setBsMobile(sysUser.getBsMobile());
+            o.setBsEmail(sysUser.getBsEmail());
 
             //删除原来的角色权限
             List<UserRoleMap> list = userRoleMapDao.findByIsDelAndUserId(0, o.getId());
@@ -135,7 +132,7 @@ public class SysUserImpl implements SysUserService {
                 }
             }
             return ApiResponseResult.success("编辑成功！");
-        }*/
+        }
     }
 
     /**
@@ -147,7 +144,7 @@ public class SysUserImpl implements SysUserService {
     @Override
     @Transactional
     public ApiResponseResult edit(SysUser sysUser) throws Exception {
-/*        if(sysUser == null || sysUser.getId() == null){
+        if(sysUser == null || sysUser.getId() == null){
             return ApiResponseResult.failure("用户ID不能为空！");
         }
         SysUser currUser = UserUtil.getSessionUser();
@@ -167,9 +164,9 @@ public class SysUserImpl implements SysUserService {
         //修改用户信息
         o.setModifiedTime(new Date());
         o.setBsName(sysUser.getBsName());
-        o.setMobile(sysUser.getMobile());
-        o.setEmail(sysUser.getEmail());
-        sysUserDao.save(o);*/
+        o.setBsMobile(sysUser.getBsMobile());
+        o.setBsEmail(sysUser.getBsEmail());
+        sysUserDao.save(o);
 
         return ApiResponseResult.success("编辑成功！");
     }
@@ -186,7 +183,7 @@ public class SysUserImpl implements SysUserService {
         if(id == null){
             return ApiResponseResult.failure("用户ID不能为空！");
         }
-/*
+
         //删除用户
         SysUser o = sysUserDao.findById((long) id);
         o.setModifiedTime(new Date());
@@ -201,7 +198,7 @@ public class SysUserImpl implements SysUserService {
                 urItem.setIsDel(1);
             }
             userRoleMapDao.saveAll(list);
-        }*/
+        }
 
         return ApiResponseResult.success("删除成功！");
     }
@@ -217,12 +214,12 @@ public class SysUserImpl implements SysUserService {
     @Transactional
     public ApiResponseResult changePassword(String oldPassword, String password, String rePassword) throws Exception{
         SysUser sysUser = UserUtil.getSessionUser();
-        if(sysUser == null || sysUser.getFid() == null){
-            return ApiResponseResult.failure("没有足够的权限修改密码！");
-        }
-//        if(sysUser == null || sysUser.getId() == null){
+//        if(sysUser == null || sysUser.getFid() == null){
 //            return ApiResponseResult.failure("没有足够的权限修改密码！");
 //        }
+        if(sysUser == null || sysUser.getId() == null){
+            return ApiResponseResult.failure("没有足够的权限修改密码！");
+        }
         if(StringUtils.isEmpty(oldPassword) || StringUtils.isEmpty(oldPassword.trim())){
             return ApiResponseResult.failure("原密码不能为空！");
         }
@@ -241,7 +238,7 @@ public class SysUserImpl implements SysUserService {
         if (!result.isResult()) {
             return result;
         }
-/*
+
         //修改用户信息
         SysUser o = sysUserDao.findById((long) sysUser.getId());
         if(o == null){
@@ -255,7 +252,7 @@ public class SysUserImpl implements SysUserService {
         //修改密码
         o.setModifiedTime(new Date());
         o.setBsPassword(DigestUtils.md5Hex(password.trim()));
-        sysUserDao.save(o);*/
+        sysUserDao.save(o);
 
         return ApiResponseResult.success("密码修改成功！");
     }
@@ -287,7 +284,7 @@ public class SysUserImpl implements SysUserService {
     @Override
     @Transactional
     public ApiResponseResult getUserInfo() throws Exception{
-        /*SysUser sysUser = UserUtil.getSessionUser();
+        SysUser sysUser = UserUtil.getSessionUser();
         if(sysUser == null || sysUser.getId() == null){
             return ApiResponseResult.failure("当前用户不在线，请先登录！");
         }
@@ -295,14 +292,14 @@ public class SysUserImpl implements SysUserService {
         SysUser o = sysUserDao.findById((long) sysUser.getId());
         if(o == null){
             return ApiResponseResult.failure("用户不存在！");
-        }*/
-        Map<String, Object> map = new HashMap<>();
-       /* map.put("id", o.getId());
+        }
+    	Map<String, Object> map = new HashMap<>();
+        map.put("id", o.getId());
         map.put("bsCode", o.getBsCode());
         map.put("bsName", o.getBsName());
-        map.put("mobile", o.getMobile());
-        map.put("email", o.getEmail());
-        map.put("isJob", o.getIsJob());*/
+        map.put("mobile", o.getBsMobile());
+        map.put("email", o.getBsEmail());
+        map.put("bsStatus", o.getBsStatus());
 
         return ApiResponseResult.success().data(map);
     }
@@ -333,7 +330,7 @@ public class SysUserImpl implements SysUserService {
             filters.add(new SearchFilter("bsCode", SearchFilter.Operator.LIKE, userName));
         }
         if(StringUtils.isNotEmpty(mobile)){
-            filters.add(new SearchFilter("mobile", SearchFilter.Operator.LIKE, mobile));
+            filters.add(new SearchFilter("bsMobile", SearchFilter.Operator.LIKE, mobile));
         }
         if(createdTimeStart != null){
             filters.add(new SearchFilter("createdTime", SearchFilter.Operator.GTE, createdTimeStart));
@@ -345,7 +342,6 @@ public class SysUserImpl implements SysUserService {
         List<SearchFilter> filters1 =new ArrayList<>();
         if(StringUtils.isNotEmpty(keyword)){
             filters1.add(new SearchFilter("bsCode", SearchFilter.Operator.LIKE, keyword));
-            filters1.add(new SearchFilter("mobile", SearchFilter.Operator.LIKE, keyword));
         }
         Specification<SysUser> spec = Specification.where(BaseService.and(filters, SysUser.class));
         Specification<SysUser> spec1 =  spec.and(BaseService.or(filters1, SysUser.class));
@@ -362,8 +358,8 @@ public class SysUserImpl implements SysUserService {
     @Override
     @Transactional
     public ApiResponseResult getUserAndRoles(Long id) throws Exception{
-    	return ApiResponseResult.success();
-       /* if(id == null){
+    	//return ApiResponseResult.success();
+       if(id == null){
             return ApiResponseResult.failure("用户ID不能为空！");
         }
         SysUser sysUser = sysUserDao.findById((long) id);
@@ -381,10 +377,10 @@ public class SysUserImpl implements SysUserService {
         mapUser.put("version", sysUser.getVersion());
         mapUser.put("bsCode",sysUser.getBsCode());
         mapUser.put("bsName",sysUser.getBsName());
-        mapUser.put("mobile",sysUser.getMobile());
-        mapUser.put("email",sysUser.getEmail());
+        mapUser.put("mobile",sysUser.getBsMobile());
+        mapUser.put("email",sysUser.getBsEmail());
         mapUser.put("del",sysUser.getIsDel());
-        mapUser.put("job",sysUser.getIsJob());
+        mapUser.put("job",sysUser.getBsStatus());
         mapUser.put("userRoles", list);
 
         //封装数据
@@ -392,24 +388,24 @@ public class SysUserImpl implements SysUserService {
         map.put("roles", list2);
         map.put("user", mapUser);
 
-        return ApiResponseResult.success().data(map);*/
+        return ApiResponseResult.success().data(map);
     }
 
     /**
      * 设置在职/离职
      * @param id
-     * @param isJob
+     * @param bsStatus
      * @return
      * @throws Exception
      */
     @Override
     @Transactional
-    public ApiResponseResult doJob(Long id, Integer isJob) throws Exception{
-    	return ApiResponseResult.failure();
-        /*if(id == null){
+    public ApiResponseResult doJob(Long id, Integer bsStatus) throws Exception{
+    	//return ApiResponseResult.failure();
+        if(id == null){
             return ApiResponseResult.failure("用户ID不能为空！");
         }
-        if(isJob == null){
+        if(bsStatus == null){
             return ApiResponseResult.failure("请正确设置在职或离职！");
         }
         SysUser o = sysUserDao.findById((long) id);
@@ -418,10 +414,10 @@ public class SysUserImpl implements SysUserService {
         }
 
         o.setModifiedTime(new Date());
-        o.setIsJob(isJob);
+        o.setBsStatus(bsStatus);
         sysUserDao.save(o);
 
-        return ApiResponseResult.success("设置成功！").data(o);*/
+        return ApiResponseResult.success("设置成功！").data(o);
     }
     
     
@@ -438,7 +434,7 @@ public class SysUserImpl implements SysUserService {
     @Transactional
     public ApiResponseResult changePassword(String loginName, String oldPassword, String password, String rePassword) throws Exception{
         //验证，原密码和新密码都不能为空，并且原密码要求输入正确，新密码和确认密码一致
-/*        if(StringUtils.isEmpty(loginName)){
+        if(StringUtils.isEmpty(loginName)){
             return ApiResponseResult.failure("登录名不能为空！");
         }
         if(StringUtils.isEmpty(oldPassword)){
@@ -447,11 +443,11 @@ public class SysUserImpl implements SysUserService {
         if(StringUtils.isEmpty(password) || StringUtils.isEmpty(rePassword)){
             return ApiResponseResult.failure("密码不能为空！");
         }
-        SysUser o = sysUserDao.findByIsDelAndUserCode(BasicStateEnum.FALSE.intValue(), loginName);
+        SysUser o = sysUserDao.findByIsDelAndBsCode(BasicStateEnum.FALSE.intValue(), loginName);
         if(o == null){
             return ApiResponseResult.failure("该用户不存在或已删除！");
         }
-        if(!o.getUserPassword().equals(MD5Util.MD5(oldPassword))){
+        if(!o.getBsPassword().equals(MD5Util.MD5(oldPassword))){
             return ApiResponseResult.failure("原密码输入错误！");
         }
         if(!password.equals(rePassword)){
@@ -460,16 +456,16 @@ public class SysUserImpl implements SysUserService {
 
         //1.修改用户密码
         //admin和super为管理员用户，无法操作
-        if("admin".equals(o.getUserCode().trim()) || "super".equals(o.getUserCode().trim())){
+        if("admin".equals(o.getBsCode().trim()) || "super".equals(o.getBsCode().trim())){
             return ApiResponseResult.failure("此用户名为管理员用户，无法修改密码！");
         }
 
         SysUser currUser = UserUtil.getCurrUser();  //获取当前用户
-        o.setUserPassword(MD5Util.MD5(password));
+        o.setBsPassword(MD5Util.MD5(password));
         o.setModifiedTime(new Date());
         o.setPkModifiedBy((currUser!=null) ? (currUser.getId()) : null);
         sysUserDao.save(o);
-*/
+
 
         return ApiResponseResult.success("密码修改成功！");
     }
@@ -495,28 +491,31 @@ public class SysUserImpl implements SysUserService {
         if(!password.equals(rePassword)){
             return ApiResponseResult.failure("密码不一致，请确认！");
         }
-//        List<SysUser> sysUserList = sysUserDao.findById((long) id);
-        List<SysUser> sysUserList = sysUserDao.findByFid(id.toString());
-        if(sysUserList == null || sysUserList.size() == 0){
-            return ApiResponseResult.failure("该用户不存在或已删除！");
-        }
-        SysUser o = sysUserList.get(0);
-        if(o == null){
-            return ApiResponseResult.failure("该用户不存在或已删除！");
-        }
-
-        //1.修改用户密码
-        //admin和super为管理员用户，无法操作
-//        if("admin".equals(o.getUserCode().trim()) || "super".equals(o.getUserCode().trim())){
-//            return ApiResponseResult.failure("此用户名为管理员用户，无法修改密码！");
+        SysUser o = sysUserDao.findById((long) id);
+//        List<SysUser> sysUserList = sysUserDao.findByFid(id.toString());
+//        if(sysUserList == null || sysUserList.size() == 0){
+//            return ApiResponseResult.failure("该用户不存在或已删除！");
 //        }
-//
-//        SysUser currUser = UserUtil.getCurrUser();  //获取当前用户
-//        o.setUserPassword(MD5Util.MD5(password));
-//        o.setModifiedTime(new Date());
-//        o.setPkModifiedBy((currUser!=null) ? (currUser.getId()) : null);
-//        sysUserDao.save(o);
+//        SysUser o = sysUserList.get(0);
+//        if(o == null){
+//            return ApiResponseResult.failure("该用户不存在或已删除！");
+//        }
+        
+        if(o == null){
+            return ApiResponseResult.failure("用户不存在！");
+        }
 
+       // 1.修改用户密码
+       // admin和super为管理员用户，无法操作
+       // if("admin".equals(o.getUserCode().trim()) || "super".equals(o.getUserCode().trim())){
+       //     return ApiResponseResult.failure("此用户名为管理员用户，无法修改密码！");
+       // }
+
+        SysUser currUser = UserUtil.getCurrUser();  //获取当前用户
+        o.setBsPassword(MD5Util.MD5(password));
+        o.setModifiedTime(new Date());
+        o.setPkModifiedBy((currUser!=null) ? (currUser.getId()) : null);
+        sysUserDao.save(o);
 
         return ApiResponseResult.success("密码重置成功！");
     }
@@ -525,11 +524,8 @@ public class SysUserImpl implements SysUserService {
 	@Override
 	public List<Map<String, Object>> findByUserCode(String userCode) throws Exception {
 		// TODO Auto-generated method stub
-		String sql = "select s.fcode,s.fname,s.fpassword,s.fcompany,s.ffactory from sys_user s where  upper(s.fcode) ='"
-				+ userCode.toUpperCase() +  "'";
-        List<Map<String, Object>> countList = sysUserDao.findByUserCode(userCode.toUpperCase());//this.findBySql(sql, SQLParameter.newInstance(), null);
-		return countList;
-       //return sysUserDao.findByIsDelAndUserCode(0, userCode);
+		 List<Map<String, Object>> countList = sysUserDao.findByBsCode1(userCode);
+			return countList;
 	}
 
     /**

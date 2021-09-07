@@ -17,7 +17,7 @@ import com.app.base.entity.BaseEntity;
 @DynamicUpdate
 public class SysRouter extends BaseEntity {
 	private static final long serialVersionUID = -5951531333314901264L;
-	public static final String TABLE_NAME = "sys_router";
+	public static final String TABLE_NAME = "app_sys_router";
 
 
 	/**

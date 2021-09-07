@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.app.base.entity.BaseEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -15,274 +17,212 @@ import javax.validation.constraints.NotNull;
 @Table(name = SysUser.TABLE_NAME)
 @DynamicUpdate
 @ApiModel
-public class SysUser{
+public class SysUser extends com.app.base.entity.BaseEntity {
     private static final long serialVersionUID = 4625660587007894370L;
-    public static final String TABLE_NAME = "sys_user";
+    public static final String TABLE_NAME = "app_sys_user";
+    
+    /**
+     * 用户账号
+     */
+    @ApiModelProperty(name = "bsCode", value = "用户账号")
+    @Column(length = 50)
+    protected String bsCode;
 
-    @Id
-    @Column(length = 20)
-    protected String fid;
-
-    @Column(length = 20)
-    protected String fcode;
-
-    @Column(length = 40)
-    protected String fname;
-
+    /**
+     * 用户名称
+     */
+    @ApiModelProperty(name = "bsName", value = "用户名称")
     @Column(length = 100)
-    protected String fpassword;
+    protected String bsName;
+   
+    /**
+     * 用户类型（0：zrt用户/1：客户用户）
+     */
+    @ApiModelProperty(name = "bsType", value = "用户类型（0：zrt用户/1：客户用户）")
+    @Column
+    protected Integer bsType = 1;
+    
+    /**
+     * 密码
+     */
+    @ApiModelProperty(name = "bsPassword", value = "密码")
+    @Column(length = 50)
+    protected String bsPassword;
 
-    @Column(length = 20)
-    protected String fbranch;
+    /**
+     * 状态（0：正常 / 1：禁用）
+     */
+    @ApiModelProperty(name = "bsStatus", value = "状态（0：正常 / 1：禁用）")
+    @Column
+    protected Integer bsStatus = 0;
+    
+    /**
+     * 邮箱
+     */
+    @ApiModelProperty(name = "bsEmail", value = "邮箱")
+    @Column(length = 100)
+    protected String bsEmail;
+    
+    /**
+     * 所在地
+     */
+    @ApiModelProperty(name = "bsLocate", value = "所在地")
+    @Column(length = 100)
+    protected String bsLocate;
+        
+    /**
+     * 联系人名
+     */
+    @ApiModelProperty(name = "bsUser", value = "联系人名")
+    @Column(length = 50)
+    protected String bsUser;
+    
+    /**
+     * 联系人电话
+     */
+    @ApiModelProperty(name = "bsMobile", value = "联系人电话")
+    @Column(length = 50)
+    protected String bsMobile;
 
-    @Column(length = 20)
-    protected String fplant;
+    /**
+     * 送货地址
+     */
+    @ApiModelProperty(name = "bsAddress", value = "送货地址")
+    @Column(length = 225)
+    protected String bsAddress;
+    
+    /**
+     * 备注
+     */
+    @ApiModelProperty(name = "bsMemo", value = "备注")
+    @Column(length = 225)
+    protected String bsMemo;
+    
 
-    @Column(length = 20)
-    protected String fsystem;
+    /**
+     * 角色ID
+     */
+    @Transient
+    protected String roleIds;
 
-    public String getFid() {
-        return fid;
-    }
 
-    public void setFid(String fid) {
-        this.fid = fid;
-    }
+	public String getBsCode() {
+		return bsCode;
+	}
 
-    public String getFcode() {
-        return fcode;
-    }
 
-    public void setFcode(String fcode) {
-        this.fcode = fcode;
-    }
+	public void setBsCode(String bsCode) {
+		this.bsCode = bsCode;
+	}
 
-    public String getFname() {
-        return fname;
-    }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
+	public String getBsName() {
+		return bsName;
+	}
 
-    public String getFpassword() {
-        return fpassword;
-    }
 
-    public void setFpassword(String fpassword) {
-        this.fpassword = fpassword;
-    }
+	public void setBsName(String bsName) {
+		this.bsName = bsName;
+	}
 
-    public String getFbranch() {
-        return fbranch;
-    }
 
-    public void setFbranch(String fbranch) {
-        this.fbranch = fbranch;
-    }
+	public Integer getBsType() {
+		return bsType;
+	}
 
-    public String getFplant() {
-        return fplant;
-    }
 
-    public void setFplant(String fplant) {
-        this.fplant = fplant;
-    }
+	public void setBsType(Integer bsType) {
+		this.bsType = bsType;
+	}
 
-    public String getFsystem() {
-        return fsystem;
-    }
 
-    public void setFsystem(String fsystem) {
-        this.fsystem = fsystem;
-    }
+	public String getBsPassword() {
+		return bsPassword;
+	}
+
+
+	public void setBsPassword(String bsPassword) {
+		this.bsPassword = bsPassword;
+	}
+
+
+	public Integer getBsStatus() {
+		return bsStatus;
+	}
+
+
+	public void setBsStatus(Integer bsStatus) {
+		this.bsStatus = bsStatus;
+	}
+
+
+	public String getBsEmail() {
+		return bsEmail;
+	}
+
+
+	public void setBsEmail(String bsEmail) {
+		this.bsEmail = bsEmail;
+	}
+
+
+	public String getBsLocate() {
+		return bsLocate;
+	}
+
+
+	public void setBsLocate(String bsLocate) {
+		this.bsLocate = bsLocate;
+	}
+
+
+	public String getBsUser() {
+		return bsUser;
+	}
+
+
+	public void setBsUser(String bsUser) {
+		this.bsUser = bsUser;
+	}
+
+
+	public String getBsMobile() {
+		return bsMobile;
+	}
+
+
+	public void setBsMobile(String bsMobile) {
+		this.bsMobile = bsMobile;
+	}
+
+
+	public String getBsAddress() {
+		return bsAddress;
+	}
+
+
+	public void setBsAddress(String bsAddress) {
+		this.bsAddress = bsAddress;
+	}
+
+
+	public String getBsMemo() {
+		return bsMemo;
+	}
+
+
+	public void setBsMemo(String bsMemo) {
+		this.bsMemo = bsMemo;
+	}
+
+
+	public String getRoleIds() {
+		return roleIds;
+	}
+
+
+	public void setRoleIds(String roleIds) {
+		this.roleIds = roleIds;
+	}
+    
 }
-
-////@NamedStoredProcedureQuery(name = "User.plusl",procedureName = "PRC_RF_J1_USER_LOGIN",parameters = {
-////        @StoredProcedureParameter(mode = ParameterMode.IN,name = "C_USER_NO",type=String.class),
-////        @StoredProcedureParameter(mode = ParameterMode.IN,name = "c_MachType",type=String.class),
-////        @StoredProcedureParameter(mode = ParameterMode.OUT,name="c_Result",type = String.class)
-////})
-////pluslinout--mysql就可以了
-////@NamedStoredProcedureQuery(name = "User.plusl",procedureName = "PLUSLINOUT",parameters = {
-////        @StoredProcedureParameter(mode = ParameterMode.IN,name = "arg",type=String.class),
-////        @StoredProcedureParameter(mode = ParameterMode.OUT,name="res",type = Integer.class)
-////})
-//
-//@NamedStoredProcedureQuery(name="test", procedureName = "PT",parameters= {
-//        @StoredProcedureParameter(mode=ParameterMode.IN,type=int.class, name="a"),
-//        @StoredProcedureParameter(mode=ParameterMode.OUT,type=int.class, name="b")
-//})
-//
-//public class SysUser extends com.app.base.entity.BaseEntity {
-//    private static final long serialVersionUID = 4625660587007894370L;
-//    public static final String TABLE_NAME = "sys_user";
-//
-//    /**
-//     * 编码（用户名）
-//     */
-//    @ApiModelProperty(name = "userCode", value = "编码（用户名）")
-//    @Column(length = 100)
-//    @NotNull
-//    protected String userCode;
-//
-//    /**
-//     * 名称
-//     */
-//    @ApiModelProperty(name = "userName", value = "名称")
-//    @Column(length = 100)
-//    @NotNull
-//    protected String userName;
-//
-//    /**
-//     * 密码
-//     */
-//    @ApiModelProperty(name = "userPassword", value = "密码")
-//    @Column(length = 255)
-//    @NotNull
-//    protected String userPassword;
-//
-//    /**
-//     * 类型（0：系统用户 / 1：供应商用户）
-//     */
-//    @ApiModelProperty(name = "userType", value = "类型（0：系统用户 / 1：供应商用户）")
-//    @Column
-//    protected int userType;
-//
-//    /**
-//     * 状态（0:启用 / 1:禁用）
-//     */
-//    @ApiModelProperty(name = "userStatus", value = "状态（0:启用 / 1:禁用）")
-//    @Column
-//    protected int userStatus;
-//
-//    /**
-//     * 注释
-//     */
-//    @ApiModelProperty(name = "userComment", value = "注释")
-//    @Column(length = 255)
-//    protected String userComment;
-//
-//    /**
-//     * 邮箱
-//     */
-//    @ApiModelProperty(name = "userEmail", value = "邮箱")
-//    @Column(length = 100)
-//    protected String userEmail;
-//
-//    /**
-//     * 手机号
-//     */
-//    @ApiModelProperty(name = "userMobile", value = "手机号")
-//    @Column(length = 100)
-//    protected String userMobile;
-//
-//    /**
-//     * 是否为超级管理员（0：普通用户，1：超级）
-//     */
-//    @ApiModelProperty(name = "userIsSuper", value = "是否为超级管理员")
-//    @Column
-//    protected int userIsSuper;
-//
-//    /**
-//     * 创建人
-//     */
-//    @ApiModelProperty(name = "pkCreatedBy", value = "创建人")
-//    @Column
-//    protected Long pkCreatedBy;
-//
-//    /**
-//     * 修改人
-//     */
-//    @ApiModelProperty(name = "pkModifiedBy", value = "修改人")
-//    @Column
-//    protected Long pkModifiedBy;
-//
-//    public String getUserCode() {
-//        return userCode;
-//    }
-//
-//    public void setUserCode(String userCode) {
-//        this.userCode = userCode;
-//    }
-//
-//    public String getUserName() {
-//        return userName;
-//    }
-//
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
-//
-//    public String getUserPassword() {
-//        return userPassword;
-//    }
-//
-//    public void setUserPassword(String userPassword) {
-//        this.userPassword = userPassword;
-//    }
-//
-//    public int getUserType() {
-//        return userType;
-//    }
-//
-//    public void setUserType(int userType) {
-//        this.userType = userType;
-//    }
-//
-//    public int getUserStatus() {
-//        return userStatus;
-//    }
-//
-//    public void setUserStatus(int userStatus) {
-//        this.userStatus = userStatus;
-//    }
-//
-//    public String getUserComment() {
-//        return userComment;
-//    }
-//
-//    public void setUserComment(String userComment) {
-//        this.userComment = userComment;
-//    }
-//
-//    public String getUserEmail() {
-//        return userEmail;
-//    }
-//
-//    public void setUserEmail(String userEmail) {
-//        this.userEmail = userEmail;
-//    }
-//
-//    public String getUserMobile() {
-//        return userMobile;
-//    }
-//
-//    public void setUserMobile(String userMobile) {
-//        this.userMobile = userMobile;
-//    }
-//
-//    public int getUserIsSuper() {
-//        return userIsSuper;
-//    }
-//
-//    public void setUserIsSuper(int userIsSuper) {
-//        this.userIsSuper = userIsSuper;
-//    }
-//
-//    public Long getPkCreatedBy() {
-//        return pkCreatedBy;
-//    }
-//
-//    public void setPkCreatedBy(Long pkCreatedBy) {
-//        this.pkCreatedBy = pkCreatedBy;
-//    }
-//
-//    public Long getPkModifiedBy() {
-//        return pkModifiedBy;
-//    }
-//
-//    public void setPkModifiedBy(Long pkModifiedBy) {
-//        this.pkModifiedBy = pkModifiedBy;
-//    }
-//}

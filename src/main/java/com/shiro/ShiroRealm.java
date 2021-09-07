@@ -68,7 +68,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		Subject subject = SecurityUtils.getSubject();
 		SysUser user = (SysUser) subject.getPrincipal();
 //		if (user.getUserMobile().equals("18516596566")) {
-        if (user.getFcode().equals("PL032")) {
+        if (user.getBsCode().equals("PL032")) {
 			// 超级管理员，添加所有角色、添加所有权限
 			authorizationInfo.addRole("*");
 			authorizationInfo.addStringPermission("*");
@@ -115,15 +115,15 @@ public class ShiroRealm extends AuthorizingRealm {
 		// 调用数据层
 		//User user = userMapper.findUserByMobile(mobile);
         //SysUser user = new SysUser();
-        SysUser user = sysUserDao.findByFcode(userName);
+        SysUser user = sysUserDao.findByBsCode(userName);
         SysUser userMD5 = new SysUser();
         try{
-            userMD5.setFid("1");
-            userMD5.setFcode(user.getFcode());
-            userMD5.setFname(user.getFname());
-            userMD5.setFpassword(DigestUtils.md5Hex(proPass(user.getFpassword())));
+            userMD5.setId(user.getId());
+            userMD5.setBsCode(user.getBsCode());
+            userMD5.setBsName(user.getBsName());
+            userMD5.setBsPassword(DigestUtils.md5Hex(proPass(user.getBsPassword())));
         }catch (Exception e){
-            userMD5.setFpassword(DigestUtils.md5Hex("a"));
+            userMD5.setBsPassword(DigestUtils.md5Hex("a"));
         }
 //        SysUser user = sysUserDao.findByIsDelAndUserCode(0,userName);
 
@@ -138,7 +138,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			// 第三个参数 ，realm名字
 //			return new SimpleAuthenticationInfo(user, DigestUtils.md5Hex(user.getUserPassword()),
 //					getName());
-            return new SimpleAuthenticationInfo(userMD5, DigestUtils.md5Hex(userMD5.getFpassword()),
+            return new SimpleAuthenticationInfo(userMD5, DigestUtils.md5Hex(userMD5.getBsPassword()),
                     getName());
 		}
 	}

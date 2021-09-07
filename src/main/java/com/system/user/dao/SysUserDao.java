@@ -19,23 +19,30 @@ import org.springframework.data.repository.query.Param;
  */
 public interface SysUserDao extends CrudRepository<SysUser, Long>, JpaSpecificationExecutor<SysUser> {
 
-//	public int countByIsDelAndUserCode(Integer isDel, String userCode);
+	public int countByIsDelAndBsCode(Integer isDel, String bsCode);
+
+    public SysUser findByIsDelAndBsCode(Integer isDel, String bsCode);
+
+    //public List<SysUser> findById(long id);
+    
+    public SysUser findById(long id);
+
+//    public int countByFcode(String userCode);
 //
-//    public SysUser findByIsDelAndUserCode(Integer isDel, String userCode);
+    public SysUser findByBsCode(String bsCode);
 //
-//    public List<SysUser> findById(long id);
-
-    public int countByFcode(String userCode);
-
-    public SysUser findByFcode(String userCode);
-
-    public List<SysUser> findByFid(String fid);
+//    public List<SysUser> findByFid(String fid);
+    
 //    
 //    @Query(value = " call p_production_plan_check(:inParam1,:inParam2,:inParam3,:inParam4)", nativeQuery = true)
 //    List<Map<String, Object>> pPlanCheck(@Param("inParam1") String calStart,@Param("inParam2") String calEnd,@Param("inParam3") String workshopcode,@Param("inParam4") String orderno);
 
-    @Query(value = "select s.fcode,s.fname,s.fpassword,s.fcompany,s.ffactory from sys_user s where  upper(s.fcode) =?1 ", nativeQuery = true)
-    public List<Map<String, Object>> findByUserCode(String usercode);
+   
+    @Query(value = "select s.bsCode,s.bsName,s.bsPasswordfrom app_sys_user s where  s.bsCode =?1 ", nativeQuery = true)
+    public List<Map<String, Object>> findByBsCode1(String bsCode);
+    
+   // @Query(value = "select s.fcode,s.fname,s.fpassword,s.fcompany,s.ffactory from sys_user s where  upper(s.fcode) =?1 ", nativeQuery = true)
+   // public List<Map<String, Object>> findByUserCode(String usercode);
     
     @Query(value = "select m.param_value pv from mes_sys_params m where m.param_code='AppVersion' ", nativeQuery = true)
     public List<Map<String, Object>> queryAppVersion();
@@ -45,11 +52,12 @@ public interface SysUserDao extends CrudRepository<SysUser, Long>, JpaSpecificat
     
     @Query(value = "select m.param_value pv from mes_sys_params m where m.param_code='AppSize' ", nativeQuery = true)
     public List<Map<String, Object>> queryAppSize();
-    
+   
     @Modifying
     @Transactional
-	@Query(value = "update sys_user i set i.fpassword=?2 where upper(i.fcode) =?1 ", nativeQuery = true)
+	@Query(value = "update app_sys_user i set i.bsPassword=?2 where upper(i.bsCode) =?1 ", nativeQuery = true)
 	public void updatePwsByUserCode(String usercode,String pwd);
+    
     /**
      *  User.pluslIO自定义存储过程的名字
      * @param arg

@@ -140,8 +140,8 @@ public class SysPermissionController extends WebController {
 			return ApiResponseResult.failure("用户未登录");
 		}
 		try {
-//			return sysPermissionService.getUserPerms(existUser.getId());
-            return sysPermissionService.getUserPerms(Long.parseLong(existUser.getFid()));
+			return sysPermissionService.getUserPerms(existUser.getId());
+            //return sysPermissionService.getUserPerms(Long.parseLong(existUser.getFid()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("根据用户id查询权限树列表查询异常！", e);
@@ -165,7 +165,8 @@ public class SysPermissionController extends WebController {
 			return ApiResponseResult.failure("用户未登录");
 		}
 		try {
-            return sysPermissionService.getUserPermsByPrc(existUser.getFcode());
+            //return sysPermissionService.getUserPermsByPrc(existUser.getFcode());
+			return sysPermissionService.getUserPerms(existUser.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(methodName+"查询异常！", e);

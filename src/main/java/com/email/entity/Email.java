@@ -20,7 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @DynamicUpdate
 public class Email extends BaseEntity {
 	private static final long serialVersionUID = -5951531333314901264L;
-	public static final String TABLE_NAME = "sys_email";
+	public static final String TABLE_NAME = "app_sys_email";
 
 	@ApiModelProperty(name="email_from",value="发件人邮箱")
 	@Column(length=200)

@@ -200,12 +200,12 @@ public class SysRoleImpl implements SysRoleService {
     @Transactional(readOnly = true)
     public ApiResponseResult getPermission() throws Exception{
         SysUser currUser = UserUtil.getCurrUser();  //获取当前用户
-//        if(currUser == null || currUser.getId() == null){
-//            return ApiResponseResult.failure("当前用户不存在！");
-//        }
-        if(currUser == null || currUser.getFid() == null){
+        if(currUser == null || currUser.getId() == null){
             return ApiResponseResult.failure("当前用户不存在！");
         }
+//        if(currUser == null || currUser.getFid() == null){
+//            return ApiResponseResult.failure("当前用户不存在！");
+//        }
 
         //1.初始化
         int isSuper = 0;

@@ -18,7 +18,7 @@ import com.app.base.entity.BaseEntity;
 @DynamicUpdate
 public class FsFile extends BaseEntity {
     private static final long serialVersionUID = -5554295976916560513L;
-    public static final String TABLE_NAME = "fs_file";
+    public static final String TABLE_NAME = "app_fs_file";
     protected Long pkFsCatalog;
     @Column(
             length = 150

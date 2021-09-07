@@ -110,7 +110,8 @@ public class SysPermissionImpl implements SysPermissionService {
 		// TODO Auto-generated method stub
 		return ApiResponseResult.success().data(sysPermissionDao.getUserPerms(id));
 	}
-
+	
+	//通过存储过程获取权限
 	@Override
 	public ApiResponseResult getUserPermsByPrc(String fcode) throws Exception {
 		// TODO Auto-generated method stub
@@ -122,6 +123,7 @@ public class SysPermissionImpl implements SysPermissionService {
         }
 		return ApiResponseResult.success().data(list.get(1));
 	}
+	
 	//执行存储获取数据1
     public List<Object> getUserPermsByPrcRf(String fcode) {
         List<Object> resultList = (List<Object>) jdbcTemplate.execute(new CallableStatementCreator() {
@@ -164,8 +166,5 @@ public class SysPermissionImpl implements SysPermissionService {
         });
         return resultList;
     }
-    
-	
-    
 
 }

@@ -23,7 +23,7 @@ import java.util.Date;
 @ApiModel
 public class TodoInfo extends BaseEntity {
     private static final long serialVersionUID = 7151771262953316256L;
-    public static final String TABLE_NAME = "t_todo_info";
+    public static final String TABLE_NAME = "app_t_todo_info";
 
     /**
      * 用户ID
